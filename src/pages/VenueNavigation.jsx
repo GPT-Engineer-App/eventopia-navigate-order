@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MapPin } from "lucide-react";
+import { fetchLocations } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const VenueNavigation = () => {
-  const [locations, setLocations] = useState([
-    { id: 1, name: 'Main Stage', description: 'Central performance area' },
-    { id: 2, name: 'Food Court', description: 'Various food vendors' },
-    { id: 3, name: 'VIP Lounge', description: 'Exclusive area for VIP ticket holders' },
-    { id: 4, name: 'Restrooms', description: 'Facilities near the entrance' },
-  ]);
+  const { data: locations, isLoading, error } = useQuery({
+    queryKey: ['locations'],
+    queryFn: fetchLocations
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">

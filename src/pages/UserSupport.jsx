@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle } from "lucide-react";
+import { fetchSupportTopics } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const UserSupport = () => {
-  const [supportTopics, setSupportTopics] = useState([
-    { id: 1, title: 'Ticketing Issues', description: 'Problems with purchasing or accessing tickets' },
-    { id: 2, title: 'Event Information', description: 'Questions about event details or schedules' },
-    { id: 3, title: 'Technical Support', description: 'App or website related issues' },
-    { id: 4, title: 'Feedback', description: 'Share your experience or suggestions' },
-  ]);
+  const { data: supportTopics, isLoading, error } = useQuery({
+    queryKey: ['supportTopics'],
+    queryFn: fetchSupportTopics
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">

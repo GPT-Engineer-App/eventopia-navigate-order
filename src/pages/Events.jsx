@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "lucide-react";
+import { fetchEvents } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const Events = () => {
-  const [events, setEvents] = useState([
-    { id: 1, name: 'Summer Music Festival', date: '2024-07-15', location: 'Central Park' },
-    { id: 2, name: 'Tech Conference 2024', date: '2024-09-20', location: 'Convention Center' },
-    { id: 3, name: 'Food & Wine Expo', date: '2024-10-05', location: 'City Hall' },
-  ]);
+  const { data: events, isLoading, error } = useQuery({
+    queryKey: ['events'],
+    queryFn: fetchEvents
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Beer } from "lucide-react";
+import { fetchMenuItems } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const BarOrdering = () => {
-  const [menu, setMenu] = useState([
-    { id: 1, name: 'Beer', price: 5 },
-    { id: 2, name: 'Wine', price: 7 },
-    { id: 3, name: 'Cocktail', price: 10 },
-    { id: 4, name: 'Soft Drink', price: 3 },
-  ]);
+  const { data: menu, isLoading, error } = useQuery({
+    queryKey: ['menuItems'],
+    queryFn: fetchMenuItems
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">
