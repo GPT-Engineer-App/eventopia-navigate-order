@@ -51,6 +51,7 @@ const Index = () => {
             {activeTab === 'bar' && <p>Bar menu and ordering interface will be available here.</p>}
             {activeTab === 'navigation' && <p>Interactive venue maps and navigation tools will be shown here.</p>}
             {activeTab === 'support' && <p>User support options and contact information will be provided here.</p>}
+            {!activeTab && <p>Loading featured content...</p>}
           </div>
         </section>
       </main>

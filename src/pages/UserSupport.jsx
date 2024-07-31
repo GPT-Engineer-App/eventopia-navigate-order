@@ -13,13 +13,16 @@ const UserSupport = () => {
     queryFn: fetchSupportTopics
   });
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred: {error.message}</div>;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">User Support</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <h2 className="text-xl font-semibold mb-4">Common Support Topics</h2>
-          {supportTopics.map((topic) => (
+          {supportTopics && supportTopics.map((topic) => (
             <Card key={topic.id} className="mb-4">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">

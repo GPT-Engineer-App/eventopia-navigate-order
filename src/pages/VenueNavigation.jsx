@@ -12,6 +12,9 @@ const VenueNavigation = () => {
     queryFn: fetchLocations
   });
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred: {error.message}</div>;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Venue Navigation</h1>
@@ -19,7 +22,7 @@ const VenueNavigation = () => {
         <Input type="text" placeholder="Search locations..." className="w-full max-w-md" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {locations.map((location) => (
+        {locations && locations.map((location) => (
           <Card key={location.id}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
